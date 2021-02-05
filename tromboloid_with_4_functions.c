@@ -15,7 +15,7 @@ float calcu(float h, float b, float d)
 }
 void output(float volume)
 {
-    printf("The Volume of Tromboloid %lf ", volume);
+    printf("The Volume of Tromboloid %f ", volume);
 }
 int main()
 { 
