@@ -16,7 +16,7 @@ float calcudis(float x1, float y1, float x2, float y2)
 }
 void output(float distance)
 {
-    printf("The distance between two points %lf ", distance);
+    printf("The distance between two points %f ", distance);
 }
 int main()
 { 
