@@ -1,8 +1,8 @@
 //WAP to find the sum of two fractions.
 #include<stdio.h>
 struct fraction
-{ float a;
-  float b;
+{ int a;
+  int b;
 };
 struct fraction input();
 float calcsum(struct fraction f1, struct fraction f2);
@@ -11,9 +11,9 @@ struct fraction input()
 {
     struct fraction frac;
     printf("Enter the numerator\n");
-    scanf("%f", &frac.a);
+    scanf("%d", &frac.a);
     printf("Enter the denominator\n");
-    scanf("%f", &frac.b);
+    scanf("%d", &frac.b);
     return frac;
 }
 float calcsum(struct fraction f1, struct fraction f2)
