@@ -5,8 +5,8 @@ struct fraction
   int b;
 };
 struct fraction input();
-void calcsum(struct fraction f1, struct fraction f2);
-void display(float s);
+struct fraction calcsum(struct fraction f1, struct fraction f2); // for computing sum
+void display(struct fraction finalfrac); // for displaying the final fraction
 struct fraction input()
 {
     struct fraction frac;
@@ -16,17 +16,21 @@ struct fraction input()
     scanf("%d", &frac.b);
     return frac;
 }
-void calcsumdis(struct fraction f1, struct fraction f2)
+struct fraction calcsum(struct fraction f1, struct fraction f2)
 {
-    int nsum, dsum;
-    nsum = (f1.a*f2.b)+(f2.a*f1.b);
-    dsum = (f1.b*f2.b);
-    printf("The Sum of fractions is %d/%d", nsum,dsum);
+    struct fraction fsum;
+    fsum.a = (f1.a*f2.b)+(f2.a*f1.b);
+    fsum.b = (f1.b*f2.b);
+    return fsum;
+}
+void display(struct fraction finalfrac)
+{ printf("The sum of the fraction is %d/%d", finalfrac.a, finalfrac.b);
 }
 int main()
 {
-    struct fraction frac1, frac2;
+    struct fraction frac1, frac2, frac3;
     frac1 = input();
     frac2 = input();
-    calcsumdis(frac1, frac2);
+    frac3 = calcsum(frac1, frac2);
+    display(frac3);
     return 0; }
