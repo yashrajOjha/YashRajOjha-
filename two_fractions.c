@@ -7,6 +7,28 @@ struct fraction
 struct fraction input();
 struct fraction calcsum(struct fraction f1, struct fraction f2); // for computing sum
 void display(struct fraction finalfrac); // for displaying the final fraction
+
+struct fraction gcd(struct fraction f)
+{
+    int div;
+    if(f.a>f.b)
+    {
+        div = f.b;
+    }
+    else
+    {
+        div = f.a;
+    }
+    for (int i = div; i > 0; i--) {
+                if (f.a % i == 0 && f.b % i == 0) {
+                        f.a = f.a / i;
+                        f.b = f.b / i;
+                }
+        }
+        
+    return f;
+}
+
 struct fraction input()
 {
     struct fraction frac;
@@ -28,9 +50,10 @@ void display(struct fraction finalfrac)
 }
 int main()
 {
-    struct fraction frac1, frac2, frac3;
+    struct fraction frac1, frac2, frac3, frac4;
     frac1 = input();
     frac2 = input();
     frac3 = calcsum(frac1, frac2);
-    display(frac3);
+    frac4 = gcd (frac3);
+    display(frac4);
     return 0; }
