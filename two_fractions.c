@@ -1,50 +1,72 @@
 //WAP to find the sum of two fractions.
 #include<stdio.h>
+
 struct fraction
-{ int a;
-  int b;
+{
+	int num;
+    int den;
 };
-struct fraction input();
-struct fraction calcsum(struct fraction f1, struct fraction f2); // for computing sum
-void display(struct fraction finalfrac, int g1); // for displaying the final fraction
 
-int gcd(int num, int den)
-{
-if(den==0)
-{
-return num;
-}
-return gcd(den,num%den);
+void input(int n, struct fraction frac[])
+{ 
+    printf("Enter the fraction \n");
+	for(int i=0;i<n;i++)
+ {
+     
+    printf("Enter the numerator: ");
+    scanf("%d",&frac[i].num);
+    printf("Enter the denominator: ");
+    scanf("%d",&frac[i].den);
+ }
 }
 
-struct fraction input()
+int gcd(int a, int b)
 {
-    struct fraction frac;
-    printf("Enter the numerator\n");
-    scanf("%d", &frac.a);
-    printf("Enter the denominator\n");
-    scanf("%d", &frac.b);
-    return frac;
-}
-struct fraction calcsum(struct fraction f1, struct fraction f2)
+if(b==0)
 {
-    struct fraction fsum;
-    fsum.a = (f1.a*f2.b)+(f2.a*f1.b);
-    fsum.b = (f1.b*f2.b);
-    return fsum;
+return a;
 }
-void display(struct fraction finalfrac, int g1)
-{ printf("The sum of the fraction is %d/%d", finalfrac.a/g1, finalfrac.b/g1);
- //  printf("%d", g1);
+return gcd(b,a%b);
 }
-int main()
-{
-    struct fraction frac1, frac2, frac3;
-    int g;
-    frac1 = input();
-    frac2 = input();
-    frac3 = calcsum(frac1, frac2);
-    g = gcd(frac3.a, frac3.b);
-    display(frac3, g);
-    return 0; }
 
+int lcm(int n, struct fraction frac[])
+{
+    int ele = frac[0].den;
+    for(int i=0;i<n;i++)
+    {
+        ele = ((frac[i].den*ele)/(gcd(frac[i].den,ele)));
+    }
+    return ele;
+}
+
+int fnum(int n, int dnm, struct fraction frac[])  // to calculate finalnumerator
+{
+int nsum = 0;
+for(int i=0;i<n;i++)
+{
+		frac[i].num = frac[i].num * (dnm/frac[i].den);
+}
+for(int i=0;i<n;i++)
+{
+	nsum =nsum+ frac[i].num;
+}
+return nsum;
+}
+
+void output(int numerator, int denominator)
+{
+	printf("Sum of given fractions is: %d/%d",numerator,denominator);
+}
+
+int main(void)
+{
+	int n;
+	printf("Enter the number of fractions to be summed");
+	scanf("%d", &n);
+	struct fraction f[n];
+	input(n,f);
+	int dn = lcm(n,f); //stores the final Denominator
+	int nm = fnum(n,dn,f); //stores the final Numerator
+	output(nm,dn);
+return 0;
+}
