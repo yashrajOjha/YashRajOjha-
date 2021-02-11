@@ -6,27 +6,15 @@ struct fraction
 };
 struct fraction input();
 struct fraction calcsum(struct fraction f1, struct fraction f2); // for computing sum
-void display(struct fraction finalfrac); // for displaying the final fraction
+void display(struct fraction finalfrac, int g1); // for displaying the final fraction
 
-struct fraction gcd(struct fraction f)
+int gcd(int num, int den)
 {
-    int div;
-    if(f.a>f.b)
-    {
-        div = f.b;
-    }
-    else
-    {
-        div = f.a;
-    }
-    for (int i = div; i > 0; i--) {
-                if (f.a % i == 0 && f.b % i == 0) {
-                        f.a = f.a / i;
-                        f.b = f.b / i;
-                }
-        }
-        
-    return f;
+if(den==0)
+{
+return num;
+}
+return gcd(den,num%den);
 }
 
 struct fraction input()
@@ -45,15 +33,18 @@ struct fraction calcsum(struct fraction f1, struct fraction f2)
     fsum.b = (f1.b*f2.b);
     return fsum;
 }
-void display(struct fraction finalfrac)
-{ printf("The sum of the fraction is %d/%d", finalfrac.a, finalfrac.b);
+void display(struct fraction finalfrac, int g1)
+{ printf("The sum of the fraction is %d/%d", finalfrac.a/g1, finalfrac.b/g1);
+ //  printf("%d", g1);
 }
 int main()
 {
-    struct fraction frac1, frac2, frac3, frac4;
+    struct fraction frac1, frac2, frac3;
+    int g;
     frac1 = input();
     frac2 = input();
     frac3 = calcsum(frac1, frac2);
-    frac4 = gcd (frac3);
-    display(frac4);
+    g = gcd(frac3.a, frac3.b);
+    display(frac3, g);
     return 0; }
+
