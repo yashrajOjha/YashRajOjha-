@@ -4,7 +4,7 @@
 struct fraction
 {
 	int num;
-        int den;
+    int den;
 };
 
 void input(int n, struct fraction frac[])
@@ -41,7 +41,7 @@ int lcm(int n, struct fraction frac[])
 
 
 
-struct fraction fnum(int n, struct fraction frac[])  // to calculate finalnumerator
+struct fraction fsum(int n, struct fraction frac[])  // to calculate finalfraction
 {
     struct fraction finalfrac;
     finalfrac.den = lcm(n, frac);
@@ -75,8 +75,7 @@ int main()
 	scanf("%d", &n);
 	struct fraction f[n];
 	input(n,f);
-	struct fraction finalf = fnum(n,f); //stores the final fraction
+	struct fraction finalf = fsum(n,f); //stores the final fraction
 	output(n,f, finalf);
-        return 0;
+    return 0;
 }
-
