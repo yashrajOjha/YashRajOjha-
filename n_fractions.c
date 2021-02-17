@@ -4,7 +4,7 @@
 struct fraction
 {
 	int num;
-    int den;
+        int den;
 };
 
 void input(int n, struct fraction frac[])
@@ -39,34 +39,44 @@ int lcm(int n, struct fraction frac[])
     return ele;
 }
 
-int fnum(int n, int deno, struct fraction frac[])  // to calculate finalnumerator
+
+
+struct fraction fnum(int n, struct fraction frac[])  // to calculate finalnumerator
 {
-int nsum = 0;
-for(int i=0;i<n;i++)
-{
-		frac[i].num = frac[i].num * (deno/frac[i].den);
-}
-for(int i=0;i<n;i++)
-{
+    struct fraction finalfrac;
+    finalfrac.den = lcm(n, frac);
+    int nsum = 0;
+    for(int i=0;i<n;i++)
+    {
+		frac[i].num = frac[i].num * (finalfrac.den/frac[i].den);
+    }
+    for(int i=0;i<n;i++)
+    {
 	nsum =nsum+ frac[i].num;
-}
-return nsum;
+    }
+    finalfrac.num = nsum;
+    return finalfrac;
 }
 
-void output(int numerator, int denominator)
+void output(int n,struct fraction f[], struct fraction finalf)
 {
-	printf("Sum of given fractions is: %d/%d",numerator,denominator);
+	printf("Sum of given fractions");
+	for(int i=0;i<n;i++)
+	{
+	    printf("%d/%d +", f[i].num, f[i].den);
+	}
+	printf(" is %d/%d", finalf.num,finalf.den);
 }
 
-int main(void)
+int main()
 {
 	int n;
 	printf("Enter the number of fractions to be summed");
 	scanf("%d", &n);
 	struct fraction f[n];
 	input(n,f);
-	int dn = lcm(n,f); //stores the final Denominator
-	int nm = fnum(n,dn,f); //stores the final Numerator
-	output(nm,dn);
-return 0;
+	struct fraction finalf = fnum(n,f); //stores the final fraction
+	output(n,f, finalf);
+        return 0;
 }
+
