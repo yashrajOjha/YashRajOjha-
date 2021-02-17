@@ -1,72 +1,49 @@
 //WAP to find the sum of two fractions.
 #include<stdio.h>
-
 struct fraction
-{
-	int num;
-    int den;
+{ int a;
+  int b;
 };
+struct fraction input();
+struct fraction calcsum(struct fraction f1, struct fraction f2); // for computing sum
 
-void input(int n, struct fraction frac[])
-{ 
-    printf("Enter the fraction \n");
-	for(int i=0;i<n;i++)
- {
-     
-    printf("Enter the numerator: ");
-    scanf("%d",&frac[i].num);
-    printf("Enter the denominator: ");
-    scanf("%d",&frac[i].den);
- }
-}
 
-int gcd(int a, int b)
+int gcd(int num, int den)
 {
-if(b==0)
+if(den==0)
 {
-return a;
+return num;
 }
-return gcd(b,a%b);
+return gcd(den,num%den);
 }
 
-int lcm(int n, struct fraction frac[])
+struct fraction input()
 {
-    int ele = frac[0].den;
-    for(int i=0;i<n;i++)
-    {
-        ele = ((frac[i].den*ele)/(gcd(frac[i].den,ele)));
-    }
-    return ele;
+    struct fraction frac;
+    printf("Enter the numerator\n");
+    scanf("%d", &frac.a);
+    printf("Enter the denominator\n");
+    scanf("%d", &frac.b);
+    return frac;
 }
-
-int fnum(int n, int dnm, struct fraction frac[])  // to calculate finalnumerator
+struct fraction calcsum(struct fraction f1, struct fraction f2)
 {
-int nsum = 0;
-for(int i=0;i<n;i++)
+    struct fraction fsum;
+    fsum.a = (f1.a*f2.b)+(f2.a*f1.b);
+    fsum.b = (f1.b*f2.b);
+    return fsum;
+}
+void display(int n, int d)
+{ printf("The sum of the fraction is %d/%d", n, d);
+ //  printf("%d", g1);
+}
+int main()
 {
-		frac[i].num = frac[i].num * (dnm/frac[i].den);
-}
-for(int i=0;i<n;i++)
-{
-	nsum =nsum+ frac[i].num;
-}
-return nsum;
-}
-
-void output(int numerator, int denominator)
-{
-	printf("Sum of given fractions is: %d/%d",numerator,denominator);
-}
-
-int main(void)
-{
-	int n;
-	printf("Enter the number of fractions to be summed");
-	scanf("%d", &n);
-	struct fraction f[n];
-	input(n,f);
-	int dn = lcm(n,f); //stores the final Denominator
-	int nm = fnum(n,dn,f); //stores the final Numerator
-	output(nm,dn);
-return 0;
-}
+    struct fraction frac1, frac2, frac3;
+    int g;
+    frac1 = input();
+    frac2 = input();
+    frac3 = calcsum(frac1, frac2);
+    g = gcd(frac3.a, frac3.b);
+    display(frac3.a/g, frac3.b/g);
+    return 0; }
