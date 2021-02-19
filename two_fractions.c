@@ -6,7 +6,7 @@ struct fraction
 };
 struct fraction input();
 struct fraction calcsum(struct fraction f1, struct fraction f2); // for computing sum
-void display(struct fraction frac);
+void display(struct fraction frac1, struct fraction frac2,struct fraction frac);
 int gcd(int num, int den)
 {
     int div;
@@ -50,8 +50,8 @@ struct fraction calcsum(struct fraction f1, struct fraction f2)
     fsum.b= fsum.b/g;
     return fsum;
 }
-void display(struct fraction frac)
-{ printf("The sum of the fraction is %d/%d", frac.a, frac.b);
+void display(struct fraction frac1, struct fraction frac2, struct fraction frac)
+{ printf("The result of %d/%d + %d/%d is %d/%d",frac1.a, frac1.b, frac2.a, frac2.b, frac.a, frac.b);
 }
 int main()
 {
@@ -59,5 +59,5 @@ int main()
     frac1 = input();
     frac2 = input();
     frac3 = calcsum(frac1, frac2);
-    display(frac3);
+    display(frac1, frac2, frac3);
     return 0; }
