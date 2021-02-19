@@ -9,11 +9,25 @@ struct fraction calcsum(struct fraction f1, struct fraction f2); // for computin
 void display(struct fraction frac);
 int gcd(int num, int den)
 {
-if(den==0)
-{
-return num;
-}
-return gcd(den,num%den);
+    int div;
+    if(num>den)
+    {
+        div=den;
+    }
+    else
+    {
+        div=num;
+    }
+    int g;
+    for(int i=div;i>0;i--)
+    {
+        if(num%i==0 && den%i==0)
+        {    
+          g=i;
+          break;
+        }
+    }
+    return g;
 }
 
 struct fraction input()
