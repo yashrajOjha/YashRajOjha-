@@ -19,14 +19,27 @@ void input(int n, struct fraction frac[])
     scanf("%d",&frac[i].den);
  }
 }
-
-int gcd(int a, int b)
+int gcd(int x, int y)
 {
-if(b==0)
-{
-return a;
-}
-return gcd(b,a%b);
+    int div;
+    if(x>y)
+    {
+        div=y;
+    }
+    else
+    {
+        div=x;
+    }
+    int g;
+    for(int i=div;i>0;i--)
+    {
+        if(x%i==0 && y%i==0)
+        {    
+          g=i;
+          break;
+        }
+    }
+    return g;
 }
 
 int lcm(int n, struct fraction frac[])
@@ -63,7 +76,7 @@ void output(int n,struct fraction f[], struct fraction finalf)
 	printf("Sum of given fractions");
 	for(int i=0;i<n;i++)
 	{
-	    printf("%d/%d +", f[i].num, f[i].den);
+	    printf("+ %d/%d ", f[i].num, f[i].den);
 	}
 	printf(" is %d/%d", finalf.num,finalf.den);
 }
@@ -79,3 +92,4 @@ int main()
 	output(n,f, finalf);
     return 0;
 }
+
